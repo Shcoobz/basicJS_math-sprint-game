@@ -25,12 +25,16 @@ const playAgainBtn = document.querySelector('.play-again');
 // Equations
 let questionAmount = 0;
 let equationsArray = [];
+let playerGuessArray = [];
 
 // Game Page
 let firstNumber = 0;
 let secondNumber = 0;
 let equationObject = {};
 const wrongFormat = [];
+
+// Scroll
+let valueY = 0;
 
 // Splash Page & Countdown
 // Update selected Label
@@ -102,6 +106,17 @@ function selectQuestionAmount(e) {
 
 // Game Logic
 // Display Game Page
+
+// Scroll, Store user selection in playerGuessArray
+function select(guessedTrue) {
+  console.log('player guess array:', playerGuessArray);
+  // Scroll 80 px
+  valueY += 80;
+  itemContainer.scroll(0, valueY);
+  // Add player guess to array
+  return guessedTrue ? playerGuessArray.push('true') : playerGuessArray.push('false');
+}
+
 function showGamePage() {
   gamePage.hidden = false;
   countdownPage.hidden = true;
