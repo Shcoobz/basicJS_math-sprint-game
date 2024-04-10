@@ -208,6 +208,7 @@ button:active {
 .play-again {
   width: 90%;
   background: var(--primary-color);
+  font-weight: bold;
 }
 
 /* Countdown Page ---------------------- */
