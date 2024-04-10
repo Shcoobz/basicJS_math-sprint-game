@@ -32,6 +32,7 @@ let secondNumber = 0;
 let equationObject = {};
 const wrongFormat = [];
 
+// Splash Page & Countdown
 // Update selected Label
 function updateSelectedLabel() {
   radioContainers.forEach((radioEl) => {
@@ -43,6 +44,19 @@ function updateSelectedLabel() {
       radioEl.classList.add('selected-label');
     }
   });
+}
+
+// Get the value from selected radio button
+function getRadioValue() {
+  let radioValue;
+
+  radioInputs.forEach((radioInput) => {
+    if (radioInput.checked) {
+      radioValue = radioInput.value;
+    }
+  });
+
+  return radioValue;
 }
 
 // Displays: 3, 2, 1, GO!
@@ -68,19 +82,7 @@ function showCountdown() {
   splashPage.hidden = true;
 
   countdownStart();
-}
-
-// Get the value from selected radio button
-function getRadioValue() {
-  let radioValue;
-
-  radioInputs.forEach((radioInput) => {
-    if (radioInput.checked) {
-      radioValue = radioInput.value;
-    }
-  });
-
-  return radioValue;
+  createEquations();
 }
 
 // Form that decides amount of questions
@@ -95,6 +97,59 @@ function selectQuestionAmount(e) {
   } else {
     // TODO: Show msg -> Choose amount of questions
   }
+}
+
+// Game Logic
+
+// Get Random Number up to a max number
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+// Create Correct/Incorrect Random Equations
+function createEquations() {
+  const MAX_CORRECT_NUMBER = 9;
+  const MAX_WRONG_NUMBER = 3;
+
+  // Randomly choose how many correct equations there should be
+  const correctEquations = getRandomInt(questionAmount);
+  console.log('correct equations', correctEquations);
+
+  // Set amount of wrong equations
+  const wrongEquations = questionAmount - correctEquations;
+  console.log('wrong equations', wrongEquations);
+
+  // Loop through, multiply random numbers up to 9, push to array
+  for (let i = 0; i < correctEquations; i++) {
+    firstNumber = getRandomInt(MAX_CORRECT_NUMBER);
+    secondNumber = getRandomInt(MAX_CORRECT_NUMBER);
+
+    const equationValue = firstNumber * secondNumber;
+    const equation = `${firstNumber} x ${secondNumber} = ${equationValue}`;
+
+    equationObject = { value: equation, evaluated: 'true' };
+    equationsArray.push(equationObject);
+  }
+
+  // Loop through, mess with the equation results, push to array
+  for (let i = 0; i < wrongEquations; i++) {
+    firstNumber = getRandomInt(MAX_CORRECT_NUMBER);
+    secondNumber = getRandomInt(MAX_CORRECT_NUMBER);
+
+    const equationValue = firstNumber * secondNumber;
+
+    wrongFormat[0] = `${firstNumber} x ${secondNumber + 1} = ${equationValue}`;
+    wrongFormat[1] = `${firstNumber} x ${secondNumber} = ${equationValue - 1}`;
+    wrongFormat[2] = `${firstNumber + 1} x ${secondNumber} = ${equationValue}`;
+
+    const formatChoice = getRandomInt(MAX_WRONG_NUMBER);
+    const equation = wrongFormat[formatChoice];
+
+    equationObject = { value: equation, evaluated: 'false' };
+    equationsArray.push(equationObject);
+  }
+  shuffle(equationsArray);
+  console.log('equations array:', equationsArray);
 }
 
 // Event Listeners
