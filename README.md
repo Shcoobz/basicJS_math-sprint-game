@@ -1,6 +1,6 @@
-# Math Sprint Game: [LIVE DEMO](https://shcoobz.github.io/math-sprint-game/)
+# basicJS_Math Sprint Game: [LIVE DEMO](https://shcoobz.github.io/basicJS_math-sprint-game/)
 
-![Math Sprint Game](img/math-sprint-game.png)
+![Math Sprint Game](img/basicJS_math-sprint-game.png)
 
 ## Summary
 
