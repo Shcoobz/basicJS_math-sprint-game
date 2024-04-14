@@ -1,4 +1,4 @@
-# [Math Sprint Game]: [LIVE DEMO](https://shcoobz.github.io/math-sprint-game/)
+# Math Sprint Game: [LIVE DEMO](https://shcoobz.github.io/math-sprint-game/)
 
 ![Math Sprint Game](img/math-sprint-game.png)
 
